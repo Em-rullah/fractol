@@ -2,31 +2,20 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <stdio.h> //DEBUGGING
+# include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <math.h>
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
+# include <X11/X.h> // SİLİNECEK
+# include <X11/keysym.h> // SİLİNECEK
 
 # define WIDTH 800
 # define HEIGHT 800
 # define ERROR_MESSAGE "Please enter \"./fractol mandelbrot\" or \"./fractol julia <value_1> <value_2>\"\n"
 # define BLACK   0x000000
 # define WHITE   0xFFFFFF
-# define RED     0xFF0000
-# define GREEN   0x00FF00
-# define BLUE    0x0000FF
-# define MAGENTA_BURST     0xFF00FF
-# define LIME_SHOCK        0xCCFF00
-# define NEON_ORANGE       0xFF6600 
-# define PSYCHEDELIC_PURPLE 0x660066
-# define AQUA_DREAM        0x33CCCC
-# define HOT_PINK          0xFF66CC 
-# define ELECTRIC_BLUE     0x0066FF
-# define LAVA_RED          0xFF3300
+# define LAVA_RED	0xFF3300
 
 
 typedef struct s_img

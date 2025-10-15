@@ -10,7 +10,7 @@ static	void	malloc_error(void)
 static void	data_init(t_fractal *fractal)
 {
 	fractal->escape_value = 4;
-	fractal->iterations_definition = 42;
+	fractal->iterations_definition = 420;
 	fractal->shift_x = 0.0;
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;

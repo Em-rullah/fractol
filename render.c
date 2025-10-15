@@ -10,17 +10,17 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
-static	void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
+static	void	mandel_vs_julia(int x, int y, t_complex *c, t_fractal *fractal)
 {
-	if (ft_strncmp(fractal->name, "julia", 5))
+	if (!ft_strncmp(fractal->name, "julia", 5))
 	{
 		c->x = fractal->julia_x;
 		c->y = fractal->julia_y;
 	}
 	else
 	{
-		c->x = z->x;
-		c->y = z->y;
+		c->x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
+		c->y = (map(y, -2, +2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
 	}
 }
 
@@ -33,10 +33,9 @@ static void	handle_pixel(int x, int y, t_fractal *fractal)
 
 	i = 0;
 
-	z.x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-	z.y = (map(y, +2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
-
-	mandel_vs_julia(&z, &c, fractal);
+	z.x = 0;
+	z.y = 0;
+	mandel_vs_julia(x, y, &c, fractal);
 
 	while (i < fractal->iterations_definition)
 	{
@@ -49,7 +48,7 @@ static void	handle_pixel(int x, int y, t_fractal *fractal)
 		}
 		i++;
 	}
-	my_pixel_put(x, y, &fractal->img, PSYCHEDELIC_PURPLE);
+	my_pixel_put(x, y, &fractal->img, LAVA_RED);
 }
 
 void	fractal_render(t_fractal *fractal)
