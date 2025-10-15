@@ -12,7 +12,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define ERROR_MESSAGE "Please enter \"./fractol mandelbrot\" or \"./fractol julia <value_1> <value_2>\"\n"
+# define ERR_MSG "Available options \"mandelbrot\" \"julia p_1 p_2\"\n"
 # define BLACK   0x000000
 # define WHITE   0xFFFFFF
 # define LAVA_RED	0xFF3300
