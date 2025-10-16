@@ -8,7 +8,7 @@ MLX_DIR =./minilibx-linux
 INCDIRS =-I. -I$(LIBFT_DIR) -I$(MLX_DIR)
 X11_LIBS := -lXext -lX11 -lm -lz -lbsd
 
-SRCS =main.c math_utils.c render.c init.c events.c string.utils.c
+SRCS =main.c math_utils.c render.c init.c events.c string.utils.c cleanup.c
 OBJS =$(SRCS:.c=.o)
 
 LIBFT_A =$(LIBFT_DIR)/libft.a

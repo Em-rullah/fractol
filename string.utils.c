@@ -3,28 +3,26 @@
 
 double	atodbl(char *s)
 {
-	long	integer_part;
-	double	fractional_part;
+	long	first_part;
+	double	second_part;
 	double	pow;
 	int		sign;
 
-	integer_part = 0;
-	fractional_part = 0;
+	first_part = 0;
+	second_part = 0;
 	sign = +1;
-	pow = 1;
-	while ((*s >= 9 && *s <= 13) || 32 == *s)
-		++s;
+	pow = 0.1;
 	while ('+' == *s || '-' == *s)
 		if ('-' == *s++)
 			sign = -sign;
 	while (*s != '.' && *s)
-		integer_part = (integer_part * 10) + (*s++ - 48);
+		first_part = (first_part * 10) + (*s++ - 48);
 	if ('.' == *s)
 		++s;
 	while (*s)
 	{
+		second_part = second_part + (*s++ - 48) * pow;
 		pow /= 10;
-		fractional_part = fractional_part + (*s++ - 48) * pow;
 	}
-	return ((integer_part + fractional_part) * sign);
+	return ((first_part + second_part) * sign);
 }

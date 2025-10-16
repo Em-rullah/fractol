@@ -2,53 +2,55 @@
 #include "fractol.h"
 
 
-static void	my_pixel_put(int x, int y, t_img *img, int color)
+static void	pixel_put(int x, int y, t_fractal *fractal, int color)
 {
 	int	offset;
 
-	offset = (y * img->line_len) + (x * (img->bpp / 8));
-	*(unsigned int *)(img->pixels_ptr + offset) = color;
+	offset = (y * fractal->line_len) + (x * (fractal->bpp / 8));
+	*(unsigned int *)(fractal->pixels_ptr + offset) = color;
 }
 
-static	void	mandel_vs_julia(int x, int y, t_complex *c, t_fractal *fractal)
+static void	check_julia(int x, int y, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
 	{
-		c->x = fractal->julia_x;
-		c->y = fractal->julia_y;
+		fractal->z.x = ((x / (double)WIDTH) * 4.0 - 2.0)
+			* fractal->zoom + fractal->shift_x;
+		fractal->z.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
+			* fractal->zoom + fractal->shift_y;
+		fractal->c.x = fractal->julia_x;
+		fractal->c.y = fractal->julia_y;
 	}
 	else
 	{
-		c->x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-		c->y = (map(y, -2, +2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
+		fractal->z.x = 0.0;
+		fractal->z.y = 0.0;
+		fractal->c.x = ((x / (double)WIDTH) * 4.0 - 2.0)
+			* fractal->zoom + fractal->shift_x;
+		fractal->c.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
+			* fractal->zoom + fractal->shift_y;
 	}
+
 }
 
 static void	handle_pixel(int x, int y, t_fractal *fractal)
 {
-	t_complex	z;
-	t_complex	c;
-	int			i;
-	int			color;
+	unsigned int	i;
 
 	i = 0;
-
-	z.x = 0;
-	z.y = 0;
-	mandel_vs_julia(x, y, &c, fractal);
-
-	while (i < fractal->iterations_definition)
+	check_julia(x, y, fractal);
+	while (i < ITERATIONS)
 	{
-		z = sum_complex(square_complex(z), c);
-		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
+		fractal->z = sum_complex(square_complex(fractal->z), fractal->c);
+		if ((fractal->z.x * fractal->z.x)
+			+ (fractal->z.y * fractal->z.y) > FRACTOL_ESCAPE)
 		{
-			color = map(i, BLACK, WHITE, 0, fractal->iterations_definition);
-			my_pixel_put(x, y, &fractal->img, color);
+			pixel_put(x, y, fractal, (INF_COLOR * i) & 0xFFFFFF);
 			return ;
 		}
 		i++;
 	}
-	my_pixel_put(x, y, &fractal->img, LAVA_RED);
+	pixel_put(x, y, fractal, FRACTOL_COLOR);
 }
 
 void	fractal_render(t_fractal *fractal)
@@ -56,14 +58,17 @@ void	fractal_render(t_fractal *fractal)
 	int	x;
 	int	y;
 
-	y = -1;
-	while (++y < HEIGHT)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		x = 0;
+		while (x < WIDTH)
 		{
 			handle_pixel(x, y, fractal);
+			x++;
 		}
+		y++;
 	}
-	mlx_put_image_to_window(fractal->mlx_connection, fractal->mlx_window, fractal->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(fractal->mlx_connection,
+		fractal->mlx_window, fractal->img_ptr, 0, 0);
 }
