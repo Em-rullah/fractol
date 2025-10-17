@@ -4,12 +4,11 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <math.h>
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 600
+# define HEIGHT 600
 # define ERR_MSG "Available options \"mandelbrot\" \"julia p_1 p_2\"\n"
 
 # define ESC_KEY      65307
@@ -22,7 +21,7 @@
 # define SCROLL_DOWN  5
 
 # define FRACTOL_ESCAPE 4
-# define ITERATIONS 420
+# define ITERATIONS 42
 # define INF_COLOR 0xFCBE11
 # define FRACTOL_COLOR	0xFF3300
 
@@ -37,31 +36,31 @@ typedef struct s_fractal
 	char		*name;
 	void		*mlx_connection;
 	void		*mlx_window;
+
 	void		*img_ptr;
 	char		*pixels_ptr;
 	int			bpp;
 	int			endian;
 	int			line_len;
 
-	t_complex	z;
-	t_complex	c;
-	int			max_i;
-	double		shift_x;
-	double		shift_y;
+	double		move_x;
+	double		move_y;
 	double		zoom;
+
+	int			is_julia;
 	double		julia_x;
 	double		julia_y;
 }	t_fractal;
 
-void		fractal_init(t_fractal *fractal);
-void		fractal_render(t_fractal *fractal);
-t_complex	sum_complex(t_complex z1, t_complex z2);
-t_complex	square_complex(t_complex z);
+void		init(t_fractal *fractal);
+void		render(t_fractal *fractal);
+t_complex	sum(t_complex z1, t_complex z2);
+t_complex	square(t_complex z);
 int			key_handler(int keysym, t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 double		atodbl(char *s);
-void		clean_init(t_fractal *fractal);
+void		error_exit(void);
 void		clean_window(t_fractal *fractal);
 void		clean_image(t_fractal *fractal);
 void		clean_pixels(t_fractal *fractal);

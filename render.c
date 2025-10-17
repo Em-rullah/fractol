@@ -10,42 +10,38 @@ static void	pixel_put(int x, int y, t_fractal *fractal, int color)
 	*(unsigned int *)(fractal->pixels_ptr + offset) = color;
 }
 
-static void	check_julia(int x, int y, t_fractal *fractal)
+static void	handle_pixel(int x, int y, t_fractal *fractal)
 {
-	if (!ft_strncmp(fractal->name, "julia", 5))
+	int			i;
+	t_complex	z;
+	t_complex	c;
+
+	i = 0;
+	if (!fractal->is_julia)
 	{
-		fractal->z.x = ((x / (double)WIDTH) * 4.0 - 2.0)
-			* fractal->zoom + fractal->shift_x;
-		fractal->z.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
-			* fractal->zoom + fractal->shift_y;
-		fractal->c.x = fractal->julia_x;
-		fractal->c.y = fractal->julia_y;
+		z.x = 0;
+		z.y = 0;
+		c.x = ((x / (double)WIDTH) * 4.0 - 2.0)
+			* fractal->zoom + fractal->move_x;
+		c.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
+			* fractal->zoom + fractal->move_y;
 	}
 	else
 	{
-		fractal->z.x = 0.0;
-		fractal->z.y = 0.0;
-		fractal->c.x = ((x / (double)WIDTH) * 4.0 - 2.0)
-			* fractal->zoom + fractal->shift_x;
-		fractal->c.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
-			* fractal->zoom + fractal->shift_y;
+		z.x = ((x / (double)WIDTH) * 4.0 - 2.0)
+			* fractal->zoom + fractal->move_x;
+		z.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
+			* fractal->zoom + fractal->move_y;
+		c.x = fractal->julia_x;
+		c.y = fractal->julia_y;
 	}
-
-}
-
-static void	handle_pixel(int x, int y, t_fractal *fractal)
-{
-	unsigned int	i;
-
-	i = 0;
-	check_julia(x, y, fractal);
 	while (i < ITERATIONS)
 	{
-		fractal->z = sum_complex(square_complex(fractal->z), fractal->c);
-		if ((fractal->z.x * fractal->z.x)
-			+ (fractal->z.y * fractal->z.y) > FRACTOL_ESCAPE)
+		z = sum(square(z), c);
+		if ((z.x * z.x)
+			+ (z.y * z.y) > FRACTOL_ESCAPE)
 		{
-			pixel_put(x, y, fractal, (INF_COLOR * i) & 0xFFFFFF);
+			pixel_put(x, y, fractal, (INF_COLOR * i));
 			return ;
 		}
 		i++;
@@ -53,10 +49,10 @@ static void	handle_pixel(int x, int y, t_fractal *fractal)
 	pixel_put(x, y, fractal, FRACTOL_COLOR);
 }
 
-void	fractal_render(t_fractal *fractal)
+void	render(t_fractal *fractal)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 
 	y = 0;
 	while (y < HEIGHT)

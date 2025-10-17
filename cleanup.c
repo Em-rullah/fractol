@@ -1,23 +1,17 @@
 
 #include "fractol.h"
 
-static void	error_exit(t_fractal *fractal)
+void	error_exit(void)
 {
-	free(fractal);
 	ft_putstr_fd("Problem with initialization\n", 2);
 	exit(EXIT_FAILURE);
-}
-
-void	clean_init(t_fractal *fractal)
-{
-	error_exit(fractal);
 }
 
 void	clean_window(t_fractal *fractal)
 {
 	mlx_destroy_display(fractal->mlx_connection);
 	free(fractal->mlx_connection);
-	error_exit(fractal);
+	error_exit();
 }
 
 void	clean_image(t_fractal *fractal)

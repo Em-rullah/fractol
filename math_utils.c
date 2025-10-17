@@ -1,7 +1,7 @@
 
 #include "fractol.h"
 
-t_complex	sum_complex(t_complex z1, t_complex z2)
+t_complex	sum(t_complex z1, t_complex z2)
 {
 	t_complex	result;
 
@@ -10,7 +10,7 @@ t_complex	sum_complex(t_complex z1, t_complex z2)
 	return (result);
 }
 
-t_complex	square_complex(t_complex z)
+t_complex	square(t_complex z)
 {
 	t_complex	result;
 

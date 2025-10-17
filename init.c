@@ -1,11 +1,11 @@
 
 #include "fractol.h"
 
-void	fractal_init(t_fractal *fractal)
+void	init(t_fractal *fractal)
 {
 	fractal->mlx_connection = mlx_init();
 	if (fractal->mlx_connection == NULL)
-		clean_init(fractal);
+		error_exit();
 	fractal->mlx_window = (void *)mlx_new_window(fractal->mlx_connection,
 			WIDTH, HEIGHT, fractal->name);
 	if (fractal->mlx_window == NULL)
