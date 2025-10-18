@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
+/*   Updated: 2025/10/18 15:22:02 by emkir            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
@@ -12,7 +23,6 @@
 # define ERR_MSG "Available options \"mandelbrot\" \"julia p_1 p_2\"\n"
 
 # define ESC_KEY      65307
-# define ESC_KEY      65307
 # define ARROW_UP     65362
 # define ARROW_DOWN   65364
 # define ARROW_LEFT   65361
@@ -22,8 +32,9 @@
 
 # define FRACTOL_ESCAPE 4
 # define ITERATIONS 42
+
 # define INF_COLOR 0xFCBE11
-# define FRACTOL_COLOR	0xFF3300
+# define IN_RANGE_COLOR	0xFF3300
 
 typedef struct s_complex
 {
@@ -50,18 +61,22 @@ typedef struct s_fractal
 	int			is_julia;
 	double		julia_x;
 	double		julia_y;
+	t_complex	z;
+	t_complex	c;
 }	t_fractal;
 
 void		init(t_fractal *fractal);
 void		render(t_fractal *fractal);
-t_complex	sum(t_complex z1, t_complex z2);
-t_complex	square(t_complex z);
+
 int			key_handler(int keysym, t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
-double		atodbl(char *s);
+
 void		error_exit(void);
 void		clean_window(t_fractal *fractal);
 void		clean_image(t_fractal *fractal);
-void		clean_pixels(t_fractal *fractal);
+
+double		atodbl(char *s);
+t_complex	sum(t_complex z1, t_complex z2);
+t_complex	square(t_complex z);
 #endif

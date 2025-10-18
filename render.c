@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/18 13:47:23 by emkir             #+#    #+#             */
+/*   Updated: 2025/10/18 15:23:36 by emkir            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
-
 
 static void	pixel_put(int x, int y, t_fractal *fractal, int color)
 {
@@ -10,43 +20,54 @@ static void	pixel_put(int x, int y, t_fractal *fractal, int color)
 	*(unsigned int *)(fractal->pixels_ptr + offset) = color;
 }
 
-static void	handle_pixel(int x, int y, t_fractal *fractal)
+static void	assign(t_fractal *fractal, int x, int y)
 {
-	int			i;
-	t_complex	z;
-	t_complex	c;
-
-	i = 0;
 	if (!fractal->is_julia)
 	{
-		z.x = 0;
-		z.y = 0;
-		c.x = ((x / (double)WIDTH) * 4.0 - 2.0)
+		fractal->z.x = 0;
+		fractal->z.y = 0;
+		fractal->c.x = (((double)x / (double)WIDTH) * 4.0 - 2.0)
 			* fractal->zoom + fractal->move_x;
-		c.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
+		fractal->c.y = (((double)y / (double)HEIGHT) * -4.0 + 2.0)
 			* fractal->zoom + fractal->move_y;
 	}
 	else
 	{
-		z.x = ((x / (double)WIDTH) * 4.0 - 2.0)
+		fractal->z.x = (((double)x / (double)WIDTH) * 4.0 - 2.0)
 			* fractal->zoom + fractal->move_x;
-		z.y = ((y / (double)HEIGHT) * -4.0 + 2.0)
+		fractal->z.y = (((double)y / (double)HEIGHT) * -4.0 + 2.0)
 			* fractal->zoom + fractal->move_y;
-		c.x = fractal->julia_x;
-		c.y = fractal->julia_y;
 	}
+}
+
+static void	clean_placeholders(t_fractal *fractal)
+{
+	fractal->z.x = 0;
+	fractal->z.y = 0;
+	if (fractal->is_julia)
+		return ;
+	fractal->c.x = 0;
+	fractal->c.y = 0;
+}
+
+static void	handle_pixel(int x, int y, t_fractal *fractal)
+{
+	int			i;
+
+	i = 0;
+	assign(fractal, x, y);
 	while (i < ITERATIONS)
 	{
-		z = sum(square(z), c);
-		if ((z.x * z.x)
-			+ (z.y * z.y) > FRACTOL_ESCAPE)
+		fractal->z = sum(square(fractal->z), fractal->c);
+		if ((fractal->z.x * fractal->z.x)
+			+ (fractal->z.y * fractal->z.y) > FRACTOL_ESCAPE)
 		{
 			pixel_put(x, y, fractal, (INF_COLOR * i));
 			return ;
 		}
 		i++;
 	}
-	pixel_put(x, y, fractal, FRACTOL_COLOR);
+	pixel_put(x, y, fractal, IN_RANGE_COLOR);
 }
 
 void	render(t_fractal *fractal)
@@ -55,12 +76,18 @@ void	render(t_fractal *fractal)
 	int			y;
 
 	y = 0;
+	if (fractal->is_julia)
+	{
+		fractal->c.x = fractal->julia_x;
+		fractal->c.y = fractal->julia_y;
+	}
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
 			handle_pixel(x, y, fractal);
+			clean_placeholders(fractal);
 			x++;
 		}
 		y++;
