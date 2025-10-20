@@ -3,26 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:46:45 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/18 13:47:50 by emkir            ###   ########.fr       */
+/*   Updated: 2025/10/19 11:40:01 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	error_exit(void)
-{
-	ft_putstr_fd("Problem with initialization\n", 2);
-	exit(EXIT_FAILURE);
-}
-
 void	clean_window(t_fractal *fractal)
 {
 	mlx_destroy_display(fractal->mlx_connection);
 	free(fractal->mlx_connection);
-	error_exit();
+	error_exit(MLX_ERROR);
 }
 
 void	clean_image(t_fractal *fractal)

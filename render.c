@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:23 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/18 15:23:36 by emkir            ###   ########.fr       */
+/*   Updated: 2025/10/20 10:31:41 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static void	assign(t_fractal *fractal, int x, int y)
 	{
 		fractal->z.x = 0;
 		fractal->z.y = 0;
-		fractal->c.x = (((double)x / (double)WIDTH) * 4.0 - 2.0)
+		fractal->c.x = (((double)x / (double)SIZE) * 4.0 - 2.0)
 			* fractal->zoom + fractal->move_x;
-		fractal->c.y = (((double)y / (double)HEIGHT) * -4.0 + 2.0)
+		fractal->c.y = (((double)y / (double)SIZE) * -4.0 + 2.0)
 			* fractal->zoom + fractal->move_y;
 	}
 	else
 	{
-		fractal->z.x = (((double)x / (double)WIDTH) * 4.0 - 2.0)
+		fractal->z.x = (((double)x / (double)SIZE) * 4.0 - 2.0)
 			* fractal->zoom + fractal->move_x;
-		fractal->z.y = (((double)y / (double)HEIGHT) * -4.0 + 2.0)
+		fractal->z.y = (((double)y / (double)SIZE) * -4.0 + 2.0)
 			* fractal->zoom + fractal->move_y;
 	}
 }
@@ -81,10 +81,10 @@ void	render(t_fractal *fractal)
 		fractal->c.x = fractal->julia_x;
 		fractal->c.y = fractal->julia_y;
 	}
-	while (y < HEIGHT)
+	while (y < SIZE)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < SIZE)
 		{
 			handle_pixel(x, y, fractal);
 			clean_placeholders(fractal);

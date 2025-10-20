@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/18 15:22:02 by emkir            ###   ########.fr       */
+/*   Updated: 2025/10/20 10:45:35 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <stdio.h>
-# include <stdlib.h>
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
-# define WIDTH 600
-# define HEIGHT 600
-# define ERR_MSG "Available options \"mandelbrot\" \"julia p_1 p_2\"\n"
+# define SIZE 900
+# define MAIN_ARG_ERROR "Available options: \"mandelbrot\" \"julia r i\".\n"
+# define MLX_ERROR "Cannot initialize window.\n"
+# define VALUE_ERROR "Value must:\n"\
+"1 - Only include one sign at start.\n"\
+"2 - Only include digits and one \".\".\n"\
+"3 - Can have maximum 4 digits after the \".\".\n"
+
 
 # define ESC_KEY      65307
 # define ARROW_UP     65362
@@ -72,11 +75,11 @@ int			key_handler(int keysym, t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 
-void		error_exit(void);
+void		error_exit(char	*s);
 void		clean_window(t_fractal *fractal);
 void		clean_image(t_fractal *fractal);
 
-double		atodbl(char *s);
+double		handle_point(char *s);
 t_complex	sum(t_complex z1, t_complex z2);
 t_complex	square(t_complex z);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:16 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/18 13:48:24 by emkir            ###   ########.fr       */
+/*   Updated: 2025/10/19 12:04:48 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,14 @@ int	main(int ac, char **av)
 	}
 	else if (4 == ac && !ft_strncmp(av[1], "julia", 5))
 	{
+		fractal.julia_x = handle_point(av[2]);
+		fractal.julia_y = handle_point(av[3]);
 		fractal.name = av[1];
 		fractal.is_julia = 1;
-		fractal.julia_x = atodbl(av[2]);
-		fractal.julia_y = atodbl(av[3]);
 		fractal_start(&fractal);
 	}
 	else
 	{
-		ft_putstr_fd(ERR_MSG, 2);
-		exit(EXIT_FAILURE);
+		error_exit(MAIN_ARG_ERROR);
 	}
 }
