@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/20 10:45:35 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/22 01:14:24 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 # define SIZE 900
 # define MAIN_ARG_ERROR "Available options: \"mandelbrot\" \"julia r i\".\n"
 # define MLX_ERROR "Cannot initialize window.\n"
-# define VALUE_ERROR "Value must:\n"\
-"1 - Only include one sign at start.\n"\
-"2 - Only include digits and one \".\".\n"\
-"3 - Can have maximum 4 digits after the \".\".\n"
-
+# define VALUE_ERROR "Value must: \n\
+1 - Can only include one sign at start,\n\
+2 - Only include digits and one \".\",\n\
+3 - Can have maximum 4 digits after the \".\".\n"
 
 # define ESC_KEY      65307
 # define ARROW_UP     65362

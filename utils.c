@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:20:59 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/20 10:46:09 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/22 01:25:15 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,50 @@ t_complex	square(t_complex z)
 	return (square);
 }
 
+static double	handle_point_decimal(char *s)
+{
+	double	result;
+	double	denom;
+	int		counter;
+
+	result = 0;
+	denom = 1;
+	counter = 4;
+	while (*s && (*s >= '0' && *s <= '9') && counter)
+	{
+		result = (result * 10) + (*s++ - 48);
+		denom *= 10;
+		counter--;
+	}
+	if (*s && !(*s >= '0' && *s <= '9'))
+		error_exit(VALUE_ERROR);
+
+	return (result / denom);
+}
+
 double	handle_point(char *s)
 {
 	double	part_one;
 	double	part_two;
-	double	sign;
-	double	pow;
-	int		count;
+	int		sign;
 
 	part_one = 0;
 	part_two = 0;
-	pow = 0.1;
-	count = 4;
 	sign = 1;
-	while ('+' == *s || '-' == *s)
-		if ('-' == *s++)
+
+	if (*s == '+' || *s == '-')
+	{
+		if (*s == '-')
 			sign = -sign;
+		s++;
+	}
+	part_one = ft_atoi(s);
 	while (*s && *s >= '0' && *s <= '9')
-		part_one = (part_one * 10) + (*s++ - 48);
+		s++;
 	if (!*s)
 		return (part_one * sign);
 	if (*s != '.')
 		error_exit(VALUE_ERROR);
-	s++;
-	while (*s && *s >= '0' && *s <= '9')
-	{
-		if (!count)
-			return ((part_one + part_two) * sign);
-		part_two = part_two + (*s++ - 48) * pow;
-		pow /= 10;
-		count--;
-	}
+	part_two = handle_point_decimal(++s);
 	return ((part_one + part_two) * sign);
 }
