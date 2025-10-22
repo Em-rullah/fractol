@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:16 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/22 01:25:07 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/23 00:04:24 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,27 @@ int	main(int ac, char **av)
 {
 	t_fractal	fractal;
 
-	if (2 == ac && !ft_strncmp(av[1], "mandelbrot", 10))
+	if (av[1] == NULL)
+		error_exit(MAIN_ARG_ERROR);
+	else if (!ft_strncmp(av[1], "mandelbrot", 10) && 2 == ac)
 	{
 		fractal.name = av[1];
 		fractal.is_julia = 0;
 		fractal_start(&fractal);
 	}
-	else if (4 == ac && !ft_strncmp(av[1], "julia", 5))
+	else if (!ft_strncmp(av[1], "julia", 5) && ac != 4)
+		error_exit(VALUE_ERROR);
+	else if (!ft_strncmp(av[1], "julia", 5) && ac == 4)
 	{
 		fractal.julia_x = handle_point(av[2]);
 		fractal.julia_y = handle_point(av[3]);
+		if (fractal.julia_x < -10.0 || fractal.julia_x > 10.0
+			|| fractal.julia_y < -10.0 || fractal.julia_y > 10.0)
+			error_exit("Julia values must be between -10.0 and 10.0\n");
 		fractal.name = av[1];
 		fractal.is_julia = 1;
 		fractal_start(&fractal);
 	}
 	else
-	{
 		error_exit(MAIN_ARG_ERROR);
-	}
 }

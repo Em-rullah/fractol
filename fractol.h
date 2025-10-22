@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/22 01:14:24 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/22 23:58:15 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
-# define SIZE 900
-# define MAIN_ARG_ERROR "Available options: \"mandelbrot\" \"julia r i\".\n"
+# define SIZE 500
+# define MAIN_ARG_ERROR "Available options: \"./fractol \
+mandelbrot\" \"./fractol julia value\".\n"
 # define MLX_ERROR "Cannot initialize window.\n"
-# define VALUE_ERROR "Value must: \n\
-1 - Can only include one sign at start,\n\
-2 - Only include digits and one \".\",\n\
-3 - Can have maximum 4 digits after the \".\".\n"
+# define VALUE_ERROR "Value must be formatted like this: reel imaginary. \
+Examples: -0.8 + 0.156 , -0.7269 + 0.1889. \n"
 
 # define ESC_KEY      65307
 # define ARROW_UP     65362
@@ -33,7 +32,7 @@
 # define SCROLL_DOWN  5
 
 # define FRACTOL_ESCAPE 4
-# define ITERATIONS 42
+# define ITERATIONS 42	
 
 # define INF_COLOR 0xFCBE11
 # define IN_RANGE_COLOR	0xFF3300

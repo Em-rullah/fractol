@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:20:59 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/22 01:25:15 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/22 14:37:41 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static double	handle_point_decimal(char *s)
 
 	result = 0;
 	denom = 1;
-	counter = 4;
+	counter = 5;
 	while (*s && (*s >= '0' && *s <= '9') && counter)
 	{
 		result = (result * 10) + (*s++ - 48);
@@ -53,7 +53,6 @@ static double	handle_point_decimal(char *s)
 	}
 	if (*s && !(*s >= '0' && *s <= '9'))
 		error_exit(VALUE_ERROR);
-
 	return (result / denom);
 }
 
