@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/27 08:48:53 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/27 10:41:43 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,16 @@ int			key_handler(int keysym, t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 
-void		error_exit(char	*s);
 void		clean_window(t_fractal *fractal);
 void		clean_image(t_fractal *fractal);
 
+void		error_exit(char	*s);
 double		handle_point(char *s);
 t_complex	sum(t_complex z1, t_complex z2);
 t_complex	square(t_complex z);
+
+void		ft_putstr_fd(char *s, int fd);
+int			ft_atoi(const char *nptr);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+
 #endif
