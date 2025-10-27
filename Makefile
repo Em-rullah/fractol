@@ -3,28 +3,23 @@ CC =cc
 CFLAGS =-Wall -Wextra -Werror
 RM =rm -f
 
-LIBFT_DIR =./libft
 MLX_DIR =./minilibx-linux
-INCDIRS =-I. -I$(LIBFT_DIR) -I$(MLX_DIR)
+INCDIRS =-I. -I$(MLX_DIR)
 X11_LIBS := -lXext -lX11 -lz -lbsd
 
 SRCS =main.c init.c render.c events.c  utils.c cleanup.c
 OBJS =$(SRCS:.c=.o)
 
-LIBFT_A =$(LIBFT_DIR)/libft.a
 MLX_A =$(MLX_DIR)/libmlx_Linux.a
 MLX_NAME =mlx_Linux
 
-LDFLAGS     := -L$(LIBFT_DIR) -L$(MLX_DIR)
-LDLIBS      := -lft -l$(MLX_NAME) $(X11_LIBS)
+LDFLAGS     :=-L$(MLX_DIR)
+LDLIBS      :=-l$(MLX_NAME) $(X11_LIBS)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_A) $(MLX_A) $(OBJS)
+$(NAME): $(MLX_A) $(OBJS)
 	$(CC) $(CFLAGS) $(INCDIRS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $@
-
-$(LIBFT_A):
-	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX_A):
 	$(MAKE) -C $(MLX_DIR)
@@ -34,12 +29,10 @@ $(MLX_A):
 
 clean:
 	$(RM) $(OBJS)
-	-$(MAKE) -C $(LIBFT_DIR) clean
 	-$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
-	-$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

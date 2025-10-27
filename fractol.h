@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/22 23:58:15 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/27 08:44:29 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FRACTOL_H
 
 # include "minilibx-linux/mlx.h"
-# include "libft/libft.h"
+# include <unistd.h>
+# include <stdlib.h>
 
 # define SIZE 500
 # define MAIN_ARG_ERROR "Available options: \"./fractol \
