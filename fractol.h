@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/27 08:44:29 by emrul            ###   ########.fr       */
+/*   Updated: 2025/10/27 08:48:53 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 mandelbrot\" \"./fractol julia value\".\n"
 # define MLX_ERROR "Cannot initialize window.\n"
 # define VALUE_ERROR "Value must be formatted like this: reel imaginary. \
-Examples: -0.8 + 0.156 , -0.7269 + 0.1889. \n"
+Examples: -0.8 0.156 , -0.7269 0.1889. \n"
 
 # define ESC_KEY      65307
 # define ARROW_UP     65362
