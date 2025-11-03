@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/11/03 09:24:10 by emrul            ###   ########.fr       */
+/*   Updated: 2025/11/03 11:20:18 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_complex	sum(t_complex z1, t_complex z2);
 t_complex	square(t_complex z);
 
 void		ft_putstr_fd(char *s, int fd);
-int			ft_atoi(const char *nptr);
+int			ft_atoi(char **nptr);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

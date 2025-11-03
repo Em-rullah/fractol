@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:20:59 by emkir             #+#    #+#             */
-/*   Updated: 2025/11/03 09:35:56 by emrul            ###   ########.fr       */
+/*   Updated: 2025/11/03 11:27:56 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,15 @@ double	handle_point(char *s)
 			sign = -sign;
 		s++;
 	}
-	part_one = ft_atoi(s);
-	while (*s && *s >= '0' && *s <= '9')
-		s++;
-	if (!*s)
+	if (!(*s) || !((*s >= '0' && *s <= '9') || *s == '.'))
+		error_exit(VALUE_ERROR);
+	if (*s == '.' && !((*(s + 1) >= '0' && *(s + 1) <= '9')))
+		error_exit(VALUE_ERROR);
+	part_one = ft_atoi(&s);
+	if (!(*s))
 		return (part_one * sign);
-	if (*s != '.')
+	else if (*s != '.' || (*s == '.' && *(s + 1) && !(*(s + 1) >= '0'
+				&& *(s + 1) <= '9')))
 		error_exit(VALUE_ERROR);
 	part_two = handle_point_decimal(++s);
 	return ((part_one + part_two) * sign);

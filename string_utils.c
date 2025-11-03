@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 10:38:23 by emrul             #+#    #+#             */
-/*   Updated: 2025/10/28 11:34:51 by emkir            ###   ########.fr       */
+/*   Updated: 2025/11/03 11:20:31 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,15 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(char **nptr)
 {
-	int		i;
-	int		sign;
 	long	n;
 
-	i = 0;
-	sign = 1;
 	n = 0;
-	while ((nptr[i] == ' ' || nptr[i] == '\f' || nptr[i] == '\n'
-			|| nptr[i] == '\r' || nptr[i] == '\t' || nptr[i] == '\v'))
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
+	while ('0' <= **nptr && **nptr <= '9')
 	{
-		if (nptr[i] == '-')
-			sign = -sign;
-		i++;
+		n = 10 * n + (**nptr - '0');
+		(*nptr)++;
 	}
-	while ('0' <= nptr[i] && nptr[i] <= '9')
-	{
-		n = 10 * n + (nptr[i] - '0');
-		i++;
-	}
-	return (n * sign);
+	return (n);
 }
