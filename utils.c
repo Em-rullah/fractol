@@ -6,7 +6,7 @@
 /*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 14:20:59 by emkir             #+#    #+#             */
-/*   Updated: 2025/10/27 10:38:14 by emrul            ###   ########.fr       */
+/*   Updated: 2025/11/03 09:35:56 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ void	error_exit(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-t_complex	sum(t_complex z1, t_complex z2)
+t_complex	sum(t_complex c_one, t_complex c_two)
 {
 	t_complex	sum;
 
-	sum.x = z1.x + z2.x;
-	sum.y = z1.y + z2.y;
+	sum.z = c_one.z + c_two.z;
+	sum.i = c_one.i + c_two.i;
 	return (sum);
 }
 
-t_complex	square(t_complex z)
+t_complex	square(t_complex c)
 {
 	t_complex	square;
 
-	square.x = (z.x * z.x) - (z.y * z.y);
-	square.y = 2 * z.x * z.y;
+	square.z = (c.z * c.z) - (c.i * c.i);
+	square.i = 2 * c.z * c.i;
 	return (square);
 }
 

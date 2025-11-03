@@ -1,5 +1,5 @@
 NAME =fractol
-CC =gcc
+CC =cc
 CFLAGS =-Wall -Wextra -Werror
 RM =rm -f
 

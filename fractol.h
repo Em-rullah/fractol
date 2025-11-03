@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emkir <emkir@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: emrul <emrul@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:47:12 by emkir             #+#    #+#             */
-/*   Updated: 2025/11/01 15:39:35 by emkir            ###   ########.fr       */
+/*   Updated: 2025/11/03 09:24:10 by emrul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ will be taken into account.) \n"
 # define SCROLL_DOWN  5
 
 # define FRACTOL_ESCAPE 4
-# define ITERATIONS 42	
+# define ITERATIONS 42
 
 # define INF_COLOR 0xFCBE11
 # define IN_RANGE_COLOR	0xFF3300
 
 typedef struct s_complex
 {
-	double	x;
-	double	y;
+	double	z;
+	double	i;
 }	t_complex;
 
 typedef struct s_fractal
@@ -57,15 +57,15 @@ typedef struct s_fractal
 	int			endian;
 	int			line_len;
 
-	double		move_x;
-	double		move_y;
+	double		move_z;
+	double		move_i;
 	double		zoom;
 
 	int			is_julia;
-	double		julia_x;
-	double		julia_y;
-	t_complex	z;
-	t_complex	c;
+	double		julia_z;
+	double		julia_i;
+	t_complex	c_one;
+	t_complex	c_two;
 }	t_fractal;
 
 void		init(t_fractal *fractal);
